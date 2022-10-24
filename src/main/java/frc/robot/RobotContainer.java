@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.DriverCommand;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -20,9 +21,12 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  public static final Joystick driverController = new Joystick(0);
-  public static final Joystick manipulatorController = new Joystick(1);
-  public static final DriveSubsystem ds = new DriveSubsystem(driverController);
+  
+  // declare subsystems here
+  public static final DriveSubsystem ds = new DriveSubsystem();
+
+  // declare commands here
+  public static final DriverCommand dc = new DriverCommand(ds);
 
 
 
@@ -45,8 +49,12 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
+  public Command autonomousCommand() {
     // An ExampleCommand will run in autonomous
     return null;
+  }
+
+  public Command teleOpCommand() {
+    return dc;
   }
 }
