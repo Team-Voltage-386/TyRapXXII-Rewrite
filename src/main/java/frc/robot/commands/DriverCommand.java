@@ -2,15 +2,18 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 import static frc.robot.Constants.ControllerConstants.*;
 
 public class DriverCommand extends CommandBase{
 
     private final DriveSubsystem ds;
+    private final ShooterSubsystem ss;
 
-    public DriverCommand(DriveSubsystem DS) {
+    public DriverCommand(DriveSubsystem DS, ShooterSubsystem SS) {
         ds = DS;
+        ss = SS;
     }
 
     // Called when the command is initially scheduled.
@@ -30,6 +33,8 @@ public class DriverCommand extends CommandBase{
 
       ds.setLeftPower(l);
       ds.setRightPower(r);
+
+      ss.setDrum(kDriverController.getRawButton(kA));
   }
 
   // Called once the command ends or is interrupted.
