@@ -20,10 +20,14 @@ public class DriverCommand extends CommandBase{
   }
 
   // Called every time the scheduler runs while the command is scheduled.
+  // Steering is surpressed by 20%, and drive power input by 25%
   @Override
   public void execute() {
-      double steerIn = kDriverController.getRawAxis(kRightHorizontal);
-      double driveIn = kDriverController.getRawAxis(kLeftVertical);
+      double steerIn = kDriverController.getRawAxis(kRightHorizontal) * 0.80; 
+      double driveIn = kDriverController.getRawAxis(kLeftVertical) * 0.75; 
+
+
+      steerIn = Math.pow(steerIn, 3);
 
       double l = driveIn - steerIn;
       double r = driveIn + steerIn;
